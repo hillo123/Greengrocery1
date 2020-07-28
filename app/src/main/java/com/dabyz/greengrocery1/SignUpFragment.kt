@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_signup.*
 
-
 class SignUpFragment : Fragment(R.layout.fragment_signup) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         btnSignUp.setOnClickListener {
@@ -15,7 +14,7 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
             activity?.getSharedPreferences("dabyzPref", Context.MODE_PRIVATE)?.edit()
                 ?.apply { putString("mail", etMail.text.toString()); commit() }
             activity?.supportFragmentManager?.beginTransaction()
-                ?.apply { replace(R.id.flFragment, ProductsFragment()); commit() }
+                ?.apply { replace(R.id.flFragment, ProductsFragment()); commit()}
         }
         btnLogIn.setOnClickListener {
             Toast.makeText(context, "Not implemented yet", Toast.LENGTH_SHORT).show()

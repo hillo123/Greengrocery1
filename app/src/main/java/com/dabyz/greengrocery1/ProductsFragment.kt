@@ -4,8 +4,10 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -15,12 +17,25 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.zxing.BarcodeFormat
+import com.journeyapps.barcodescanner.BarcodeEncoder
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.card_product.view.*
 import kotlinx.android.synthetic.main.fragment_products.*
+import java.lang.Exception
+
 
 class ProductsFragment : Fragment(R.layout.fragment_products) {
 
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val encoder = BarcodeEncoder()
+        val bitmap = encoder.encodeBitmap("Davyz",
+            BarcodeFormat.QR_CODE, 100,100)
+        iv_barcode?.setImageBitmap(bitmap)
         val storeModel = ViewModelProvider(this).get(StoreModel::class.java)
         var productsAdapter = ProductsListAdapter(activity as Context, storeModel)
         recyclerView.apply {
